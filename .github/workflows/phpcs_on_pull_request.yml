@@ -1,0 +1,20 @@
+on: pull_request
+name: Inspections
+jobs:
+  runPHPCSInspection:
+    name: Run PHPCS inspection
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+    - name: Run PHPCS inspection
+      uses: docker://ghcr.io/rtcamp/action-phpcs-code-review:classroom
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SKIP_FOLDERS: "tests,.github"
+      with:
+        args: "WordPress,WordPress-Core,WordPress-Docs"
+    - name: Cleanup
+      if: ${{ always() }}
+      uses: rtCamp/action-cleanup@master
