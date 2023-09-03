@@ -88,3 +88,35 @@ function wp_book_register_category_widget() {
     register_widget('Book_Category_Widget');
 }
 add_action('widgets_init', 'wp_book_register_category_widget');
+
+// Function to render the custom dashboard widget
+function wp_book_dashboard_widget() {
+    $categories = get_terms(array(
+        'taxonomy' => 'book_category',
+        'orderby' => 'count',
+        'order' => 'DESC',
+        'number' => 5,
+    ));
+
+    if (!empty($categories)) {
+        echo '<ul>';
+        foreach ($categories as $category) {
+            echo '<li><strong>' . esc_html($category->name) . '</strong>: ' . esc_html($category->count) . ' books</li>';
+        }
+        echo '</ul>';
+    } else {
+        echo 'No book categories found.';
+    }
+}
+
+// Function to add the custom dashboard widget
+function wp_book_add_dashboard_widget() {
+    wp_add_dashboard_widget(
+        'wp_book_dashboard_widget', 
+        'Top Book Categories', 
+        'wp_book_dashboard_widget' 
+    );
+}
+
+// Hook to add the dashboard widget
+add_action('wp_dashboard_setup', 'wp_book_add_dashboard_widget');
