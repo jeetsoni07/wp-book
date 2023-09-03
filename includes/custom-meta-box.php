@@ -4,12 +4,12 @@ add_action('add_meta_boxes', 'wp_book_add_custom_meta_box');
 
 function wp_book_add_custom_meta_box() {
     add_meta_box(
-        'wp_book_meta_box',            // Unique ID
-        'Book Meta Information',       // Meta Box Title
-        'wp_book_render_meta_box',     // Callback function to render the meta box
-        'book',                        // Post type to add the meta box to
-        'normal',                      // Context (normal, advanced, side)
-        'high'                         // Priority (high, core, default, low)
+        'wp_book_meta_box',
+        'Book Meta Information',
+        'wp_book_render_meta_box',
+        'book',
+        'normal',
+        'high'
     );
 }
 

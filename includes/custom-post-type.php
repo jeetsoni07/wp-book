@@ -81,7 +81,7 @@ function register_book_tag_taxonomy() {
     );
 
     $args = array(
-        'hierarchical' => false, // Set to false for non-hierarchical (tags)
+        'hierarchical' => false, 
         'labels' => $labels,
         'show_ui' => true,
         'show_admin_column' => true,

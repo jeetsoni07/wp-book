@@ -10,7 +10,6 @@ class Book_Category_Widget extends WP_Widget {
     }
 
     // Widget output
-    // Widget output
     public function widget($args, $instance) {
         $title = apply_filters('widget_title', $instance['title']);
         $category_slug = $instance['category'];
@@ -24,7 +23,7 @@ class Book_Category_Widget extends WP_Widget {
         // Query books based on the selected category
         $args_query = array(
             'post_type' => 'book',
-            'posts_per_page' => 5, // Change the number of books to display
+            'posts_per_page' => 5,
             'post_status' => 'publish',
             'tax_query' => array(
                 array(
