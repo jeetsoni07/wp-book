@@ -66,8 +66,31 @@ function register_book_category_taxonomy() {
 }
 add_action('init', 'register_book_category_taxonomy');
 
-// Associate the "Book Category" taxonomy with the "Book" custom post type
-function associate_taxonomy_with_post_type() {
-    register_taxonomy_for_object_type('book_category', 'book');
+// Register the custom non-hierarchical taxonomy "Book Tag"
+function register_book_tag_taxonomy() {
+    $labels = array(
+        'name' => 'Book Tags',
+        'singular_name' => 'Book Tag',
+        'search_items' => 'Search Book Tags',
+        'all_items' => 'All Book Tags',
+        'edit_item' => 'Edit Book Tag',
+        'update_item' => 'Update Book Tag',
+        'add_new_item' => 'Add New Book Tag',
+        'new_item_name' => 'New Book Tag Name',
+        'menu_name' => 'Book Tags',
+    );
+
+    $args = array(
+        'hierarchical' => false, // Set to false for non-hierarchical (tags)
+        'labels' => $labels,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'query_var' => 'book-tag',
+        'rewrite' => array('slug' => 'book-tag'),
+    );
+
+    register_taxonomy('book_tag', 'book', $args);
 }
-add_action('init', 'associate_taxonomy_with_post_type');
+add_action('init', 'register_book_tag_taxonomy');
+
+
